@@ -2,32 +2,36 @@ package homework1;
 
 public class FigurePainter
 {
-    public static void main(String[] args)
+    public   void fg1(int hight)
     {
-        for(byte i = 0; i < 5; i++)
+        for(int i = 0; i < hight; i++)
         {
-            for(byte j = 0; j <= i; j++)
+            for(int j = 0; j <= i; j++)
             {
                 System.out.print("* ");
             }
             System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        for(byte i = 4; i >= 0; i-- )
+    }
+
+    public void fg2(int hight)
+    {
+        for(int i = hight - 1; i >= 0; i-- )
         {
-            for(byte j = 0; j <= i; j++)
+            for(int j = 0; j <= i; j++)
             {
                 System.out.print("* ");
             }
             System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        byte num = 4;
-        for(byte i = 4; i >= 0; i--)
+    }
+
+    public  void  fg3(int hight)
+    {
+        int num = hight - 1;
+        for(int i = hight - 1; i >= 0; i--)
         {
-            for(byte j = 0; j < 5; j++)
+            for(int j = 0; j < 5; j++)
             {
                 if(j >= num)
                 {
@@ -41,12 +45,14 @@ public class FigurePainter
             num--;
             System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        num = 0;
-        for(byte i = 4; i >= 0; i--)
+    }
+
+    public void  fg4(int hight)
+    {
+        int num = 0;
+        for(int i = hight - 1; i >= 0; i--)
         {
-            for(byte j = 0; j < 5; j++)
+            for(int j = 0; j < 5; j++)
             {
                 if(j >= num)
                 {
@@ -60,6 +66,7 @@ public class FigurePainter
             num++;
             System.out.println();
         }
-
     }
+
+
 }
