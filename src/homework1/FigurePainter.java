@@ -68,5 +68,23 @@ public class FigurePainter
         }
     }
 
+    public void fg5(int hight)
+    {
+        for(int i=0; i < hight; i++)
+        {
+            for(int j = 0; j < hight; j++)
+            {
+                if(j >= hight - i - 1 )
+                {
+                    System.out.print("* ");
+                }
+                else
+                {
+                    System.out.print(' ');
+                }
+            }
+            System.out.println();
+        }
+    }
 
 }
