@@ -18,9 +18,9 @@ public class ArraySort
             }
         }
 
-        for(int i = 0; i < arr.length; i++)
+        for (int i : arr)
         {
-            System.out.print(arr[i] + " ");
+            System.out.print(i + " ");
         }
     }
 }
