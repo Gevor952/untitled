@@ -16,6 +16,10 @@ public class FigurePainterTest
         System.out.println();
         System.out.println();
         fg.fg4(8);
+        System.out.println();
+        System.out.println();
+        fg.fg5(9);
+
 
 
     }

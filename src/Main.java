@@ -1,10 +1,15 @@
-import java.util.Scanner;
+import work.Stack.Stack;
+
 
 public class Main
 {
 
     public static void main(String[] args)
     {
-        int[] nums = {6, 7, 8};
+        Stack st = new Stack(3);
+        st.push(1);
+        st.push(2);
+        st.push(3);
+        st.push(4);
     }
 }
