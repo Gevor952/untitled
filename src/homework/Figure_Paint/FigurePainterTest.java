@@ -1,4 +1,4 @@
-package homework.homework1.Figure_Paint;
+package homework.Figure_Paint;
 
 
 public class FigurePainterTest

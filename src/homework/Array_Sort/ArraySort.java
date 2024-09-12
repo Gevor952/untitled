@@ -1,4 +1,4 @@
-package homework.homework1.Array_Sort;
+package homework.Array_Sort;
 
 public class ArraySort
 {
