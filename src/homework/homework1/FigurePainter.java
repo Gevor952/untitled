@@ -2,9 +2,9 @@ package homework.homework1;
 
 public class FigurePainter
 {
-    public   void fg1(int hight)
+    public   void fg1(int height)
     {
-        for(int i = 0; i < hight; i++)
+        for(int i = 0; i < height; i++)
         {
             for(int j = 0; j <= i; j++)
             {
@@ -14,9 +14,9 @@ public class FigurePainter
         }
     }
 
-    public void fg2(int hight)
+    public void fg2(int height)
     {
-        for(int i = hight - 1; i >= 0; i-- )
+        for(int i = height - 1; i >= 0; i-- )
         {
             for(int j = 0; j <= i; j++)
             {
@@ -26,10 +26,10 @@ public class FigurePainter
         }
     }
 
-    public  void  fg3(int hight)
+    public  void  fg3(int height)
     {
-        int num = hight - 1;
-        for(int i = hight - 1; i >= 0; i--)
+        int num = height - 1;
+        for(int i = height - 1; i >= 0; i--)
         {
             for(int j = 0; j < 5; j++)
             {
@@ -47,10 +47,10 @@ public class FigurePainter
         }
     }
 
-    public void  fg4(int hight)
+    public void  fg4(int height)
     {
         int num = 0;
-        for(int i = hight - 1; i >= 0; i--)
+        for(int i = height - 1; i >= 0; i--)
         {
             for(int j = 0; j < 5; j++)
             {
@@ -68,13 +68,13 @@ public class FigurePainter
         }
     }
 
-    public void fg5(int hight)
+    public void fg5(int height)
     {
-        for(int i=0; i < hight; i++)
+        for(int i=0; i < height; i++)
         {
-            for(int j = 0; j < hight; j++)
+            for(int j = 0; j < height; j++)
             {
-                if(j >= hight - i - 1 )
+                if(j >= height - i - 1 )
                 {
                     System.out.print("* ");
                 }
