@@ -23,7 +23,7 @@ public class DynamicArray {
     //3․ հին մասիվի հղումը կապենք նոր մասիվի հղման հետ։
     private void extend()
     {
-        int[] newarray = new int[array.length + 10];
+        int[] newarray = new int[array.length * 2];
         for(int i = 0; i < size; i++)
         {
             newarray[i] = array[i];
