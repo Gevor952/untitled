@@ -90,7 +90,7 @@ public class BraceChecker
         Brace last;
         while((last = st.pop()) != null)
         {
-            System.out.println("Error: Opened" + last.getBrace() + " but not closed no " + last.getBrace());
+            System.out.println("Error: Opened" + last.getBrace() + " but not closed no " + (last.getIndex() + 1));
         }
 
     }
