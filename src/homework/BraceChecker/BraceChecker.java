@@ -1,6 +1,7 @@
 package homework.BraceChecker;
 
-import work.Stack.Stack;
+import work.Stack.Brace;
+import work.Stack.StackBrace;
 
 public class BraceChecker
 {
@@ -26,9 +27,8 @@ public class BraceChecker
 
     public void check()
     {
-        Stack st = new Stack(srchBrace());
-        int pop;
-
+        StackBrace st = new StackBrace(srchBrace());
+        Brace pop = null;
         for(int i = 0; i < text.length(); i++)
         {
             char last;
@@ -38,17 +38,17 @@ public class BraceChecker
                 case '{':
                 case '[':
                 case '(':
-                    st.push(c);
+                    st.push(new Brace(c, i));
                     break;
                 case ')':
-                    pop = st.pop();
-                    if(pop == 0)
+                     pop = st.pop();
+                    if(pop == null)
                     {
                         System.out.println("Error: Close " + c + " but not opened on" + i);
                     }
                     else
                     {
-                        last = (char)pop;
+                        last = pop.getBrace();
                         if(last != '(')
                         {
                             System.out.println("Error: Close " + c + " but open " + last + " at " + i);
@@ -57,13 +57,13 @@ public class BraceChecker
                     break;
                 case '}':
                     pop = st.pop();
-                    if(pop == 0)
+                    if(pop == null)
                     {
                         System.out.println("Error: Close " + c + " but not opened on" + i);
                     }
                     else
                     {
-                        last = (char)pop;
+                        last = pop.getBrace();
                         if(last != '{')
                         {
                             System.out.println("Error: Close " + c + " but open " + last + " at " + i);
@@ -72,13 +72,13 @@ public class BraceChecker
                     break;
                 case ']':
                     pop = st.pop();
-                    if(pop == 0)
+                    if(pop == null)
                     {
                         System.out.println("Error: Close " + c + " but not opened on" + i);
                     }
                     else
                     {
-                        last = (char)pop;
+                        last = pop.getBrace();
                         if(last != '[')
                         {
                             System.out.println("Error: Close " + c + " but open " + last + " at " + i);
@@ -87,10 +87,10 @@ public class BraceChecker
 
             }
         }
-        int last;
-        while((last = st.pop()) != 0)
+        Brace last;
+        while((last = st.pop()) != null)
         {
-            System.out.println("Error: Opened" + (char)last + " but not closed");
+            System.out.println("Error: Opened" + last.getBrace() + " but not closed no " + last.getBrace());
         }
 
     }
