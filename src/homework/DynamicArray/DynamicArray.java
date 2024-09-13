@@ -23,19 +23,16 @@ public class DynamicArray {
     //3․ հին մասիվի հղումը կապենք նոր մասիվի հղման հետ։
     private void extend()
     {
-        int[] newarray = new int[array.length * 2];
-        for(int i = 0; i < size; i++)
-        {
-            newarray[i] = array[i];
-        }
-        array = newarray;
+        int[] newArray = new int[array.length * 2];
+        System.arraycopy(array, 0, newArray, 0, size);
+        array = newArray;
     }
 
     //եթե տրված ինդեքսը մեր ունեցած մասիվի ինդեքսի սահմաններում է, վերադարձնել
     // մասիվի index-երրորդ էլեմենտը։ Հակառակ դեպքում վերադարձնել -1։
     public int getByIndex(int index)
     {
-        if( index >= 0 && index < array.length)
+        if( index >= 0 && index < size)
         {
             return array[index];
         }
@@ -45,10 +42,19 @@ public class DynamicArray {
     //տպել մասիվի ավելացված էլեմենտները
     public void print()
     {
-        for(int i : array)
+        for(int i = 0; i < size; i++)
         {
-            System.out.print(i + " ");
+            System.out.print(array[i] + " ");
         }
+        System.out.println();
+    }
+
+    public void deleteByIndex(int index)
+    {
+        int[] newArray = new int[(size - index) + 10];
+        System.arraycopy(array, index + 1, newArray, 0, size );
+        System.arraycopy(newArray, 0, array, index , size);
+        size--;
     }
 
 }
