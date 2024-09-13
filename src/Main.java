@@ -12,7 +12,7 @@ public class Main
      arr.add(1);
      arr.add(2);
      arr.add(3);
-     arr.deleteByIndex(1);
+     arr.deleteByIndex(2);
      arr.print();
     }
 }

@@ -53,8 +53,34 @@ public class DynamicArray {
     {
         int[] newArray = new int[(size - index) + 10];
         System.arraycopy(array, index + 1, newArray, 0, size );
-        System.arraycopy(newArray, 0, array, index , size);
-        size--;
+        System.arraycopy(newArray, 0, array, index , size--);
+    }
+
+    public void set(int index, int value)
+    {
+        if(index >= 0 && index < size)
+        {
+            array[index] = value;
+        }
+        else
+        {
+            System.out.println("index out of bounds");
+        }
+    }
+
+    public void add(int index, int value)
+    {
+        if(size == array.length - 2)
+        {
+            extend();
+        }
+        if(index >= 0 && index < size)
+        {
+            int[] newArray = new int[(size - index) + 10];
+            System.arraycopy(array, index , newArray, 0, size );
+            System.arraycopy(newArray, 0, array, index + 1 , size++);
+            array[index] = value;
+        }
     }
 
 }
