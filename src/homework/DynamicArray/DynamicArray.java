@@ -83,4 +83,49 @@ public class DynamicArray {
         }
     }
 
+    public boolean exists(int value)
+    {
+        for(int i : array)
+        {
+            if(i == value)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int howManySimilarNumbers(int value)
+    {
+        int count = 0;
+        for(int i : array)
+        {
+            if(value == i)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int[] getIndexByValue(int value)
+    {
+        int count = howManySimilarNumbers(value);
+        if(count > 0)
+        {
+            int[] indexArray = new int[count];
+            for(int i: array)
+            {
+                indexArray[i] = i;
+            }
+            return indexArray;
+        }
+        else
+        {
+            System.out.println("in this array there is no that number");
+            return null;
+        }
+
+    }
+
 }
