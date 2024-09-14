@@ -1,10 +1,13 @@
 package homework.BraceChecker;
 
+import java.util.Scanner;
+
 public class BraceCheckerTest
 {
     public static void main(String[] args)
     {
-        BraceChecker bc = new BraceChecker("()(");
+        Scanner input = new Scanner(System.in);
+        BraceChecker bc = new BraceChecker(input.nextLine());
         bc.check();
     }
 }
