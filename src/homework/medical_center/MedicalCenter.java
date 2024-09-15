@@ -50,6 +50,8 @@ public class MedicalCenter implements MedicalCenterCommands
                 case PRINT_ALL_PATENTS:
                     printAllPatients();
                     break;
+                default:
+                    System.out.println("Wrong command");
 
             }
         }
