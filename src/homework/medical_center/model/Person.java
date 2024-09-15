@@ -1,6 +1,6 @@
 package homework.medical_center.model;
 
-public class Person
+abstract public class Person
 {
     private String id;
     private String name;
