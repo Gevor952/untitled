@@ -6,19 +6,19 @@ public class Book
 {
     private String id;
     private String title;
-    private String author;
+    private Author author;
     private double price;
     private int qty;
 
 
     public Book(){}
 
-    public Book(String id, String title, String author, double price,  int qty)
+    public Book(String id, String title, Author author, double price, int qty)
     {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.price = price;
-        this.id = id;
         this.qty = qty;
     }
 
@@ -35,7 +35,7 @@ public class Book
         return title;
     }
 
-    public String getAuthor()
+    public Author getAuthor()
     {
         return author;
     }
@@ -55,7 +55,7 @@ public class Book
         this.title = title;
     }
 
-    public void setAuthor(String author)
+    public void setAuthor(Author author)
     {
         this.author = author;
     }
@@ -75,15 +75,22 @@ public class Book
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Book book = (Book) o;
-        return Double.compare(price, book.price) == 0 && qty == book.qty && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(id, book.id);
+        return Double.compare(price, book.price) == 0 && qty == book.qty && Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(title, author, price, id, qty);
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(title);
+        result = 31 * result + Objects.hashCode(author);
+        result = 31 * result + Double.hashCode(price);
+        result = 31 * result + qty;
+        return result;
     }
+
 
     @Override
     public String toString()
@@ -91,7 +98,7 @@ public class Book
         return "Book{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
+                ", author=" + author +
                 ", price=" + price +
                 ", qty=" + qty +
                 '}';
