@@ -101,8 +101,8 @@ public class MedicalCenter implements MedicalCenterCommands
         System.out.println("The doctor is busy at this time");
         doctor.printTime();
 
-        System.out.println("Please input register date time (dd-MM-yyyy HH:mm)");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        System.out.println("Please input register date time (dd.MM.yyyy HH:mm)");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         boolean star = true;
         String strDate = null;
         while (star)
@@ -116,7 +116,7 @@ public class MedicalCenter implements MedicalCenterCommands
             }
             catch(ParseException e)
             {
-                System.out.println("Please input correct format (dd-MM-yyyy HH:mm)!!!!!!!");
+                System.out.println("Please input correct format (dd.MM.yyyy HH:mm)!!!!!!!");
                 star = true;
             }
             catch (TimeNotAllowedException e)
@@ -125,6 +125,8 @@ public class MedicalCenter implements MedicalCenterCommands
                 star = true;
             }
         }
+
+
 
 
 
