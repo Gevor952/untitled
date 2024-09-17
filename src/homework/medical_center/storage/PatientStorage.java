@@ -58,4 +58,21 @@ public class PatientStorage
     }
 
 
+    public void printTimes()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            patients[i].printTime();
+        }
+    }
+
+    public int getSize()
+    {
+        return size;
+    }
+
+    public int[] getTimeByIndex(int i)
+    {
+        return patients[i].getDate();
+    }
 }

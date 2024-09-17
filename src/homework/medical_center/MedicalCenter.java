@@ -5,7 +5,13 @@ import homework.medical_center.model.Patient;
 import homework.medical_center.storage.DoctorStorage;
 import homework.medical_center.storage.PatientStorage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
+
+import static homework.medical_center.Profession.GENERAL_PRACTITIONER;
 
 public class MedicalCenter implements MedicalCenterCommands
 {
@@ -13,10 +19,9 @@ public class MedicalCenter implements MedicalCenterCommands
     static DoctorStorage doctorStorage = new DoctorStorage();
     static PatientStorage patientStorage = new PatientStorage();
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws ParseException {
         doctorStorage.add(new Doctor("001", "Ashot", "Tatevosyan",
-                "ash@gmail.com", "+34777654987", "srtaban"));
+                "ash@gmail.com", "+34777654987", GENERAL_PRACTITIONER));
         boolean isRun = true;
 
         while (isRun)
@@ -74,8 +79,7 @@ public class MedicalCenter implements MedicalCenterCommands
         doctor.printPatient();
     }
 
-    private static void addPatient()
-    {
+    private static void addPatient() {
         System.out.println("Please input the id of the patient");
         String id = scanner.nextLine();
         System.out.println("Please input the name of the patient");
@@ -87,17 +91,44 @@ public class MedicalCenter implements MedicalCenterCommands
         System.out.println("Please input the phone number of the patient");
         String phone = scanner.next();
         doctorStorage.print();
-        System.out.println("Please input the name of the doctor you wish to see");
-        String doctorName = scanner.next();
         System.out.println("Please input the id of the doctor you wish to see");
         String doctorId = scanner.next();
-        System.out.println("Please input register date time");
-        String dateTime = scanner.next();
         Doctor doctor = doctorStorage.getDoctorById(doctorId);
-        if(doctor != null)
+        if(doctor == null)
         {
-            doctor.addPatient(new Patient(id, name, surname, email, phone, doctorName, dateTime));
+            return;
         }
+        System.out.println("The doctor is busy at this time");
+        doctor.printTime();
+
+        System.out.println("Please input register date time (dd-MM-yyyy HH:mm)");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        boolean star = true;
+        String strDate = null;
+        while (star)
+        {
+            strDate = scanner.nextLine();
+            try
+            {
+                star = false;
+                sdf.parse(strDate);
+                doctor.searchTime(strDate);
+            }
+            catch(ParseException e)
+            {
+                System.out.println("Please input correct format (dd-MM-yyyy HH:mm)!!!!!!!");
+                star = true;
+            }
+            catch (TimeNotAllowedException e)
+            {
+                System.out.println("This hour is busy");
+                star = true;
+            }
+        }
+
+
+
+        doctor.addPatient(new Patient(id, name, surname, email, phone, doctorId, strDate));
 
     }
 
@@ -120,7 +151,16 @@ public class MedicalCenter implements MedicalCenterCommands
         System.out.println("Please input the doctor pone number");
         String pone = scanner.nextLine();
         System.out.println("Please input the doctor profession");
-        String profession = scanner.nextLine();
+        String profession = scanner.next();
+        Profession prof = null;
+        try
+        {
+            prof = Profession.valueOf(profession.toUpperCase());
+        }catch (IllegalArgumentException e)
+        {
+            profession = null;
+        }
+
         if(name != null && !name.isEmpty())
         {
             doctor.setName(name);
@@ -139,7 +179,7 @@ public class MedicalCenter implements MedicalCenterCommands
         }
         if(profession != null && !profession.isEmpty())
         {
-            doctor.setProfession(profession);
+            doctor.setProfession(prof);
         }
     }
     private static void deleteDoctorById()
@@ -172,8 +212,14 @@ public class MedicalCenter implements MedicalCenterCommands
         String email = scanner.next();
         System.out.println("Please input the phone number of the doctor");
         String phone = scanner.next();
-        System.out.println("Please input the profession of the doctor");
+        System.out.println("Please choose the profession of the doctor");
+        Profession[] professions = Profession.values();
+        for(Profession prof : professions)
+        {
+            System.out.println(prof);
+        }
         String profession = scanner.next();
-        doctorStorage.add(new Doctor(id, name, surname, email, phone, profession));
+        Profession prof = Profession.valueOf(profession.toUpperCase());
+        doctorStorage.add(new Doctor(id, name, surname, email, phone, prof));
     }
 }
