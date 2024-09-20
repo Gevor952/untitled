@@ -5,29 +5,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class Patient extends Person
-{
+public class Patient extends Person {
     String doctorID;
     SimpleDateFormat registerDateTime = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     Date date;
 
 
     public Patient(String id, String name, String surname, String email,
-                   String phoneNumber, String doctorID, String registerDateTime)  {
+                   String phoneNumber, String doctorID, String registerDateTime) {
         super(id, name, surname, email, phoneNumber);
         this.doctorID = doctorID;
-        try
-        {
+        try {
             this.date = this.registerDateTime.parse(registerDateTime);
-        }
-        catch (ParseException e)
-        {
+        } catch (ParseException e) {
             System.out.println("Error");
         }
 
     }
 
-    public Patient(){};
+    public Patient() {
+    }
+
+    ;
 
     @Override
     public boolean equals(Object o) {
@@ -70,8 +69,7 @@ public class Patient extends Person
         this.registerDateTime = registerDateTime;
     }
 
-    public void printTime()
-    {
+    public void printTime() {
         System.out.println(date);
     }
 

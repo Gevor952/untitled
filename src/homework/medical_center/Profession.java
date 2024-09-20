@@ -1,7 +1,6 @@
 package homework.medical_center;
 
-public enum Profession
-{
+public enum Profession {
     GENERAL_PRACTITIONER,
     PEDIATRICIAN,
     CARDIOLOGIST,

@@ -10,20 +10,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-public class Doctor extends Person
-{
+public class Doctor extends Person {
     private Profession profession;
     private PatientStorage patientStorage = new PatientStorage();
 
-    public Doctor(String id, String name, String surname, String email, String phoneNumber, Profession profession)
-    {
+    public Doctor(String id, String name, String surname, String email, String phoneNumber, Profession profession) {
         super(id, name, surname, email, phoneNumber);
         this.profession = profession;
     }
 
 
-
-    public Doctor() {}
+    public Doctor() {
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -49,24 +47,20 @@ public class Doctor extends Person
                 "} " + super.toString();
     }
 
-    public void addPatient(Patient patient)
-    {
+    public void addPatient(Patient patient) {
         patientStorage.add(patient);
     }
 
 
-    public void printPatient()
-    {
+    public void printPatient() {
         patientStorage.print();
     }
 
-    public void printTime()
-    {
+    public void printTime() {
         patientStorage.printTimes();
     }
 
-    public void searchTime(String strDate) throws ParseException, TimeNotAllowedException
-    {
+    public void searchTime(String strDate) throws ParseException, TimeNotAllowedException {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         Date date = sdf.parse(strDate);
@@ -76,10 +70,8 @@ public class Doctor extends Person
         calendar.setTime(date);
         calendar.add(Calendar.MINUTE, -30);
         Date before = calendar.getTime();
-        for (int i = 0; i < patientStorage.getSize(); i++)
-        {
-            if(patientStorage.getTimeByIndex(i).before(after) && patientStorage.getTimeByIndex(i).after(before))
-            {
+        for (int i = 0; i < patientStorage.getSize(); i++) {
+            if (patientStorage.getTimeByIndex(i).before(after) && patientStorage.getTimeByIndex(i).after(before)) {
                 throw new TimeNotAllowedException();
             }
         }

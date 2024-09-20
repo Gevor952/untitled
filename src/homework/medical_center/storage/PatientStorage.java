@@ -4,77 +4,61 @@ import homework.medical_center.model.Patient;
 
 import java.util.Date;
 
-public class PatientStorage
-{
+public class PatientStorage {
     private Patient[] patients = new Patient[10];
     private int size = 0;
 
-    public void add(Patient Patient)
-    {
-        if(size == patients.length)
-        {
+    public void add(Patient Patient) {
+        if (size == patients.length) {
             extendStorage();
         }
         patients[size++] = Patient;
     }
 
-    private void extendStorage()
-    {
+    private void extendStorage() {
         Patient[] temp = new Patient[size * 2];
         System.arraycopy(patients, 0, temp, 0, size);
         patients = temp;
     }
 
-    public void print()
-    {
-        for (int i = 0; i < size; i++)
-        {
+    public void print() {
+        for (int i = 0; i < size; i++) {
             System.out.println(patients[i]);
         }
     }
 
 
-    public Patient getPatientById(String id)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            if (patients[i].getId().equals(id))
-            {
+    public Patient getPatientById(String id) {
+        for (int i = 0; i < size; i++) {
+            if (patients[i].getId().equals(id)) {
                 return patients[i];
             }
         }
         return null;
     }
 
-    public void deletePatient(String id)
-    {
-        for(int i = 0; i < size; i++)
-        {
-            if(patients[i].getId().equals(id))
-            {
+    public void deletePatient(String id) {
+        for (int i = 0; i < size; i++) {
+            if (patients[i].getId().equals(id)) {
                 Patient[] temp = new Patient[(size - i) + 10];
-                System.arraycopy(patients, i + 1, temp, 0, size );
-                System.arraycopy(temp, 0, patients, i , size--);
+                System.arraycopy(patients, i + 1, temp, 0, size);
+                System.arraycopy(temp, 0, patients, i, size--);
             }
         }
     }
 
 
-    public void printTimes()
-    {
-        for (int i = 0; i < size; i++)
-        {
+    public void printTimes() {
+        for (int i = 0; i < size; i++) {
             patients[i].printTime();
         }
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return size;
     }
 
-    public Date getTimeByIndex(int i)
-    {
+    public Date getTimeByIndex(int i) {
         return patients[i].getDate();
     }
 }
