@@ -2,6 +2,8 @@ package homework.medical_center.storage;
 
 import homework.medical_center.model.Patient;
 
+import java.util.Date;
+
 public class PatientStorage
 {
     private Patient[] patients = new Patient[10];
@@ -71,7 +73,7 @@ public class PatientStorage
         return size;
     }
 
-    public int[] getTimeByIndex(int i)
+    public Date getTimeByIndex(int i)
     {
         return patients[i].getDate();
     }

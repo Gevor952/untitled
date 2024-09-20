@@ -13,8 +13,7 @@ import java.util.Scanner;
 
 import static homework.medical_center.Profession.GENERAL_PRACTITIONER;
 
-public class MedicalCenter implements MedicalCenterCommands
-{
+public class MedicalCenter implements MedicalCenterCommands {
     static Scanner scanner = new Scanner(System.in);
     static DoctorStorage doctorStorage = new DoctorStorage();
     static PatientStorage patientStorage = new PatientStorage();
@@ -24,13 +23,11 @@ public class MedicalCenter implements MedicalCenterCommands
                 "ash@gmail.com", "+34777654987", GENERAL_PRACTITIONER));
         boolean isRun = true;
 
-        while (isRun)
-        {
+        while (isRun) {
             MedicalCenterCommands.printCommands();
             String command = scanner.nextLine();
 
-            switch(command)
-            {
+            switch (command) {
                 case EXIT:
                     isRun = false;
                     break;
@@ -62,18 +59,15 @@ public class MedicalCenter implements MedicalCenterCommands
         }
     }
 
-    private static void printAllPatients()
-    {
+    private static void printAllPatients() {
         doctorStorage.printAllPatients();
     }
 
-    private static void printAllPatientsByDoctor()
-    {
+    private static void printAllPatientsByDoctor() {
         doctorStorage.print();
         System.out.println("Please input the doctor ID whose patients do you want to see");
         Doctor doctor = doctorStorage.getDoctorById(scanner.nextLine());
-        if(doctor == null)
-        {
+        if (doctor == null) {
             return;
         }
         doctor.printPatient();
@@ -83,19 +77,18 @@ public class MedicalCenter implements MedicalCenterCommands
         System.out.println("Please input the id of the patient");
         String id = scanner.nextLine();
         System.out.println("Please input the name of the patient");
-        String name = scanner.next();
+        String name = scanner.nextLine();
         System.out.println("Please input the surname of the patient");
-        String surname = scanner.next();
+        String surname = scanner.nextLine();
         System.out.println("Please input the email of the patient");
-        String email = scanner.next();
+        String email = scanner.nextLine();
         System.out.println("Please input the phone number of the patient");
-        String phone = scanner.next();
+        String phone = scanner.nextLine();
         doctorStorage.print();
         System.out.println("Please input the id of the doctor you wish to see");
-        String doctorId = scanner.next();
+        String doctorId = scanner.nextLine();
         Doctor doctor = doctorStorage.getDoctorById(doctorId);
-        if(doctor == null)
-        {
+        if (doctor == null) {
             return;
         }
         System.out.println("The doctor is busy at this time");
@@ -105,43 +98,33 @@ public class MedicalCenter implements MedicalCenterCommands
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         boolean star = true;
         String strDate = null;
-        while (star)
-        {
-            strDate = scanner.nextLine();
-            try
-            {
+        while (star) {
+
+            try {
                 star = false;
+                strDate = scanner.nextLine();
                 sdf.parse(strDate);
                 doctor.searchTime(strDate);
-            }
-            catch(ParseException e)
-            {
+            } catch (ParseException e) {
                 System.out.println("Please input correct format (dd.MM.yyyy HH:mm)!!!!!!!");
                 star = true;
-            }
-            catch (TimeNotAllowedException e)
-            {
+            } catch (TimeNotAllowedException e) {
                 System.out.println("This hour is busy");
                 star = true;
             }
         }
 
 
-
-
-
         doctor.addPatient(new Patient(id, name, surname, email, phone, doctorId, strDate));
 
     }
 
-    private static void changeDoctor()
-    {
+    private static void changeDoctor() {
         doctorStorage.print();
         System.out.println("Please input the doctor ID");
         String id = scanner.nextLine();
         Doctor doctor = doctorStorage.getDoctorById(id);
-        if(doctor == null)
-        {
+        if (doctor == null) {
             return;
         }
         System.out.println("Please input the doctor Name");
@@ -155,55 +138,45 @@ public class MedicalCenter implements MedicalCenterCommands
         System.out.println("Please input the doctor profession");
         String profession = scanner.next();
         Profession prof = null;
-        try
-        {
+        try {
             prof = Profession.valueOf(profession.toUpperCase());
-        }catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             profession = null;
         }
 
-        if(name != null && !name.isEmpty())
-        {
+        if (name != null && !name.isEmpty()) {
             doctor.setName(name);
         }
-        if(surname != null && !surname.isEmpty())
-        {
+        if (surname != null && !surname.isEmpty()) {
             doctor.setSurname(surname);
         }
-        if(email != null && !email.isEmpty())
-        {
+        if (email != null && !email.isEmpty()) {
             doctor.setEmail(email);
         }
-        if(pone != null && !pone.isEmpty())
-        {
+        if (pone != null && !pone.isEmpty()) {
             doctor.setPhoneNumber(pone);
         }
-        if(profession != null && !profession.isEmpty())
-        {
+        if (profession != null && !profession.isEmpty()) {
             doctor.setProfession(prof);
         }
     }
-    private static void deleteDoctorById()
-    {
+
+    private static void deleteDoctorById() {
         doctorStorage.print();
         String doctorId = scanner.nextLine();
         Doctor doctor = doctorStorage.getDoctorById(doctorId);
-        if(doctor != null)
-        {
+        if (doctor != null) {
             doctorStorage.deleteDoctor(doctorId);
             System.out.println("Doctor deleted successfully");
         }
     }
 
-    private static void searchDoctorByProfession()
-    {
+    private static void searchDoctorByProfession() {
         System.out.println("Please input the profession of the doctor you want to search");
         doctorStorage.printDoctorByProfession(scanner.nextLine());
     }
 
-    private static void addDoctor()
-    {
+    private static void addDoctor() {
         System.out.println("Please input the id of the doctor");
         String id = scanner.nextLine();
         System.out.println("Please input the name of the doctor");
@@ -216,8 +189,7 @@ public class MedicalCenter implements MedicalCenterCommands
         String phone = scanner.next();
         System.out.println("Please choose the profession of the doctor");
         Profession[] professions = Profession.values();
-        for(Profession prof : professions)
-        {
+        for (Profession prof : professions) {
             System.out.println(prof);
         }
         String profession = scanner.next();

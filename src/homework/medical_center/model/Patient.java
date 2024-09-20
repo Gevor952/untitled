@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Patient extends Person
 {
     String doctorID;
-    SimpleDateFormat registerDateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    SimpleDateFormat registerDateTime = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     Date date;
 
 
@@ -75,20 +75,11 @@ public class Patient extends Person
         System.out.println(date);
     }
 
-    public int[] getDate()
-    {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yyyy");
-        String[] strHour = (dateFormat.format(date)).split(":");
-        String[] dateStr = dateFormat2.format(date).split("-");
-        int[] hours = new int[5];
-        hours[0] = Integer.parseInt(dateStr[0]);
-        hours[1] = Integer.parseInt(dateStr[1]);
-        hours[2] = Integer.parseInt(dateStr[2]);
-        hours[3] = Integer.parseInt(strHour[0]);
-        hours[4] = Integer.parseInt(strHour[1]);
-        return hours;
+    public Date getDate() {
+        return date;
     }
 
-
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
