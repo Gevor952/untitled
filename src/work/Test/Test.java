@@ -1,14 +1,21 @@
 package work.Test;
 
+import java.nio.charset.Charset;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Random;
 
-public class Test {
-    public static void main(String[] args) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date date = sdf.parse("3:00");
-        String parsedDate = sdf.format(date);
-        System.out.println(parsedDate);
+
+
+
+
+    public class Test {
+
+
+
+        public static void main(String[] args) {
+
+        }
     }
-}
+
+
+
