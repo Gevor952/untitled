@@ -98,8 +98,7 @@ public class OnlineStore implements OnlineStoreCommands {
         orderStorage.cancelById(orderId);
     }
 
-    private static void buyProduct()
-    {
+    private static void buyProduct() {
         System.out.println("Please input the product id");
         String productId = scanner.nextLine();
         Product product = productStorage.searchById(productId);
@@ -107,12 +106,11 @@ public class OnlineStore implements OnlineStoreCommands {
         int qty = Integer.parseInt(scanner.nextLine());
         try {
             product.checkQty(qty);
-        }catch (OutOfStockException e)
-        {
+        } catch (OutOfStockException e) {
             System.out.println("There are not many items in stock");
         }
         PaymentMethod[] paymentMethods = PaymentMethod.values();
-        for (PaymentMethod paymentMethod : paymentMethods){
+        for (PaymentMethod paymentMethod : paymentMethods) {
             System.out.print(paymentMethod);
         }
         System.out.println("Please choose one of the payment methods");
@@ -122,11 +120,11 @@ public class OnlineStore implements OnlineStoreCommands {
         System.out.println("The price of the product is " + price + "$" + " do you want to buy?");
         System.out.println("Please input yes or no");
         String answer = scanner.nextLine();
-        if (answer.equals("yes")){
+        if (answer.equals("yes")) {
             Date date = new Date();
             String orderId = RandomStringGenerator.generateRandomString(30);
-            orderStorage.add(new Order(orderId, user, product, date, price, DELIVERED, qty, paymentMethod ));
-        }else {
+            orderStorage.add(new Order(orderId, user, product, date, price, DELIVERED, qty, paymentMethod));
+        } else {
             System.out.println("Purchase cancelled");
         }
     }
