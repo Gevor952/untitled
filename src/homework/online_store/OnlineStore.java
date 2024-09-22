@@ -100,10 +100,10 @@ public class OnlineStore implements OnlineStoreCommands {
 
     private static void buyProduct()
     {
-        System.out.print("Please input the product id");
+        System.out.println("Please input the product id");
         String productId = scanner.nextLine();
         Product product = productStorage.searchById(productId);
-        System.out.print("Please input the product qty");
+        System.out.println("Please input the product qty");
         int qty = Integer.parseInt(scanner.nextLine());
         try {
             product.checkQty(qty);
@@ -133,23 +133,23 @@ public class OnlineStore implements OnlineStoreCommands {
 
     private static void removeProductById() {
         productStorage.print();
-        System.out.print("Please input the product id which you want to remove");
+        System.out.println("Please input the product id which you want to remove");
         String productId = scanner.nextLine();
         productStorage.deleteById(productId);
     }
 
     private static void addProduct() {
-        System.out.print("Please input the product id");
+        System.out.println("Please input the product id");
         String productId = scanner.nextLine();
-        System.out.print("Please input the product name");
+        System.out.println("Please input the product name");
         String productName = scanner.nextLine();
-        System.out.print("Please input the product description");
+        System.out.println("Please input the product description");
         String productDescription = scanner.nextLine();
-        System.out.print("Please input the product price");
+        System.out.println("Please input the product price");
         double productPrice = Double.parseDouble(scanner.nextLine());
-        System.out.print("Please input the product stock quantity");
+        System.out.println("Please input the product stock quantity");
         int productStockQuantity = Integer.parseInt(scanner.nextLine());
-        System.out.print("Please choose the product type");
+        System.out.println("Please choose the product type");
         Type[] types = Type.values();
         for (Type type : types) {
             System.out.print(type);
@@ -162,15 +162,15 @@ public class OnlineStore implements OnlineStoreCommands {
     }
 
     private static void registerUser() {
-        System.out.print("Please input the user id");
+        System.out.println("Please input the user id");
         String userId = scanner.nextLine();
-        System.out.print("Please input the user name");
+        System.out.println("Please input the user name");
         String userName = scanner.nextLine();
-        System.out.print("Please input the user email");
+        System.out.println("Please input the user email");
         String email = scanner.nextLine();
-        System.out.print("Please input the account password");
+        System.out.println("Please input the account password");
         String password = scanner.nextLine();
-        System.out.print("Please input user type");
+        System.out.println("Please input user type");
         UserType[] userTypes = UserType.values();
         for (UserType userType : userTypes) {
             System.out.println(userType);
