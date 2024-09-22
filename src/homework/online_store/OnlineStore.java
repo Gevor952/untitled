@@ -176,7 +176,8 @@ public class OnlineStore implements OnlineStoreCommands {
             System.out.println(userType);
         }
         UserType userType = UserType.valueOf((scanner.nextLine()).toUpperCase());
-        userStorage.add(new User(userId, userName, email, password, userType));
+        user = new User(userId, userName, email, password, userType);
+        userStorage.add(user);
 
     }
 
