@@ -152,7 +152,7 @@ public class OnlineStore implements OnlineStoreCommands {
         System.out.println("Please choose the product type");
         Type[] types = Type.values();
         for (Type type : types) {
-            System.out.print(type);
+            System.out.println(type);
         }
         System.out.println("Please input the product type");
         Type type = Type.valueOf((scanner.nextLine()).toUpperCase());
