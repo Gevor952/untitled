@@ -182,9 +182,7 @@ public class OnlineStore implements OnlineStoreCommands {
     private static void loginUser() {
         System.out.println("Please input your email address");
         String email = scanner.nextLine();
-        System.out.println("Please input your password");
-        String password = scanner.nextLine();
-        user = userStorage.searchUserByEmail(password);
+        user = userStorage.searchUserByEmail(email);
 
     }
 }
