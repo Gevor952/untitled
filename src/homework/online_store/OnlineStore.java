@@ -1,5 +1,10 @@
 package homework.online_store;
 
+import homework.online_store.Enum.PaymentMethod;
+import homework.online_store.Enum.Type;
+import homework.online_store.Enum.UserType;
+import homework.online_store.Exception.OutOfStockException;
+import homework.online_store.Interface.OnlineStoreCommands;
 import homework.online_store.model.Order;
 import homework.online_store.model.Product;
 import homework.online_store.model.User;
@@ -11,7 +16,7 @@ import work.RandomStringGenerator;
 import java.util.Date;
 import java.util.Scanner;
 
-import static homework.online_store.OrderStatus.DELIVERED;
+import static homework.online_store.Enum.OrderStatus.DELIVERED;
 
 
 public class OnlineStore implements OnlineStoreCommands {

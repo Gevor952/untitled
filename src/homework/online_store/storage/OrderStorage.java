@@ -4,7 +4,7 @@ import homework.online_store.model.Order;
 import homework.online_store.model.Product;
 import homework.online_store.model.User;
 
-import static homework.online_store.OrderStatus.*;
+import static homework.online_store.Enum.OrderStatus.*;
 
 public class OrderStorage {
     private Order[] orders = new Order[100];

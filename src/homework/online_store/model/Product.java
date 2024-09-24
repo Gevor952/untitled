@@ -1,8 +1,8 @@
 package homework.online_store.model;
 
 
-import homework.online_store.OutOfStockException;
-import homework.online_store.Type;
+import homework.online_store.Exception.OutOfStockException;
+import homework.online_store.Enum.Type;
 
 import java.util.Objects;
 

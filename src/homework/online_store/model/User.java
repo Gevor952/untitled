@@ -1,6 +1,6 @@
 package homework.online_store.model;
 
-import homework.online_store.UserType;
+import homework.online_store.Enum.UserType;
 
 import java.util.Objects;
 

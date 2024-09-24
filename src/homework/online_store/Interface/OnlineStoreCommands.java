@@ -1,4 +1,4 @@
-package homework.online_store;
+package homework.online_store.Interface;
 
 public interface OnlineStoreCommands {
 

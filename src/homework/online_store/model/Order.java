@@ -1,7 +1,7 @@
 package homework.online_store.model;
 
-import homework.online_store.OrderStatus;
-import homework.online_store.PaymentMethod;
+import homework.online_store.Enum.OrderStatus;
+import homework.online_store.Enum.PaymentMethod;
 
 import java.util.Date;
 import java.util.Objects;
