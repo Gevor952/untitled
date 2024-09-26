@@ -28,16 +28,33 @@ public class OnlineStore implements OnlineStoreCommands {
     static OrderStorage orderStorage = new OrderStorage();
 
     public static void main(String[] args) {
-        OnlineStoreCommands.LoginOrRegister();
-        switch (scanner.nextLine()) {
-            case LOGIN:
-                loginUser();
-                break;
-            case REGISTER:
-                registerUser();
 
+        boolean start = true;
+
+        while (start) {
+            OnlineStoreCommands.LoginOrRegister();
+            switch (scanner.nextLine()) {
+                case LOGOUT:
+                    start = false;
+                    break;
+                case LOGIN:
+                    loginUser();
+                    break;
+                case REGISTER:
+                    registerUser();
+                    break;
+
+
+            }
+            if (user != null) {
+                storeStart();
+            }
         }
 
+
+    }
+
+    private static void storeStart() {
         switch (user.getUserType()) {
             case ADMIN:
                 boolean startAdmin = true;
@@ -45,6 +62,7 @@ public class OnlineStore implements OnlineStoreCommands {
                     OnlineStoreCommands.adminCommands();
                     switch (scanner.nextLine()) {
                         case LOGOUT:
+                            user = null;
                             startAdmin = false;
                             break;
                         case ADD_PRODUCT:
@@ -73,6 +91,7 @@ public class OnlineStore implements OnlineStoreCommands {
                     OnlineStoreCommands.userCommands();
                     switch (scanner.nextLine()) {
                         case LOGOUT:
+                            user = null;
                             startUser = false;
                             break;
                         case PRINT_ALL_PRODUCTS:
@@ -91,6 +110,7 @@ public class OnlineStore implements OnlineStoreCommands {
                 }
 
         }
+
     }
 
     private static void changOrderStatus() {
@@ -144,23 +164,34 @@ public class OnlineStore implements OnlineStoreCommands {
     private static void addProduct() {
         System.out.println("Please input the product id");
         String productId = scanner.nextLine();
-        System.out.println("Please input the product name");
-        String productName = scanner.nextLine();
-        System.out.println("Please input the product description");
-        String productDescription = scanner.nextLine();
-        System.out.println("Please input the product price");
-        double productPrice = Double.parseDouble(scanner.nextLine());
-        System.out.println("Please input the product stock quantity");
-        int productStockQuantity = Integer.parseInt(scanner.nextLine());
-        System.out.println("Please choose the product type");
-        Type[] types = Type.values();
-        for (Type type : types) {
-            System.out.println(type);
-        }
-        System.out.println("Please input the product type");
-        Type type = Type.valueOf((scanner.nextLine()).toUpperCase());
+        Product product = productStorage.searchById(productId);
+        if (product == null) {
+            System.out.println("Please input the product name");
+            String productName = scanner.nextLine();
+            System.out.println("Please input the product description");
+            String productDescription = scanner.nextLine();
+            System.out.println("Please input the product price");
+            double productPrice = Double.parseDouble(scanner.nextLine());
+            System.out.println("Please input the product stock quantity");
+            int productStockQuantity = Integer.parseInt(scanner.nextLine());
+            System.out.println("Please choose the product type");
+            Type[] types = Type.values();
+            for (Type type : types) {
+                System.out.println(type);
+            }
+            System.out.println("Please input the product type");
+            Type type = Type.valueOf((scanner.nextLine()).toUpperCase());
 
-        productStorage.add(new Product(productId, productName, productDescription, productPrice, productStockQuantity, type));
+            productStorage.add(new Product(productId, productName, productDescription,
+                    productPrice, productStockQuantity, type));
+        }
+        else
+        {
+            System.out.println("Please input how many products you want to add?");
+            int qty = Integer.parseInt(scanner.nextLine());
+            product.setStockQty(qty);
+        }
+
 
     }
 

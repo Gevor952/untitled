@@ -2,10 +2,12 @@ package homework.online_store.Interface;
 
 public interface OnlineStoreCommands {
 
-    String LOGIN = "0";
-    String REGISTER = "1";
-
     String LOGOUT = "0";
+
+    String LOGIN = "1";
+    String REGISTER = "2";
+
+
     String ADD_PRODUCT = "1";
     String REMOVE_PRODUCT_BY_ID = "2";
     String PRINT_PRODUCTS = "3";
@@ -21,6 +23,7 @@ public interface OnlineStoreCommands {
 
     static void LoginOrRegister()
     {
+        System.out.println("Please input " + LOGOUT + " for logout");
         System.out.println("Please input " + LOGIN + " for login");
         System.out.println("Please input " + REGISTER + " for register");
     }

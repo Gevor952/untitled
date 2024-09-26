@@ -20,16 +20,17 @@ public class ProductStorage {
     }
 
     public void print() {
-        for (Product product : products) {
-            System.out.println(product);
+        for (int i = 0; i < size; i++) {
+            Product product = products[i];
         }
+
     }
 
 
     public void deleteById(String id) {
         for (int i = 0; i < size; i++) {
             if (products[i].getId().equals(id)) {
-                for (int j = i -1; j < size; j++) {
+                for (int j = i - 1; j < size; j++) {
                     products[j] = products[j + 1];
                 }
                 size--;

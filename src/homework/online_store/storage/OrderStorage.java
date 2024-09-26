@@ -24,8 +24,8 @@ public class OrderStorage {
     }
 
     public void print() {
-        for (Order order : orders) {
-            System.out.println(order);
+        for(int i = 0; i < size; i++) {
+            System.out.println(orders[i]);
         }
     }
 
