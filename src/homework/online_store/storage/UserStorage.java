@@ -9,31 +9,25 @@ public class UserStorage {
     private int size = 0;
     Scanner scanner = new Scanner(System.in);
 
-    public void add(User user)
-    {
-        if(size == users.length)
-        {
+    public void add(User user) {
+        if (size == users.length) {
             extendStorage();
         }
         users[size++] = user;
     }
 
-    private void extendStorage()
-    {
+    private void extendStorage() {
         User[] temp = new User[users.length * 2];
         System.arraycopy(users, 0, temp, 0, users.length);
         users = temp;
     }
 
     public User searchUserByEmail(String email) {
-        for(int i = 0; i < size; i++)
-        {
-            if(users[i].getEmail().equals(email))
-            {
+        for (int i = 0; i < size; i++) {
+            if (users[i].getEmail().equals(email)) {
                 System.out.println("Please input password");
                 String password = scanner.nextLine();
-                if(password.equals(users[i].getPassword()))
-                {
+                if (password.equals(users[i].getPassword())) {
                     return users[i];
                 }
                 System.out.println("Wrong password");
@@ -50,8 +44,8 @@ public class UserStorage {
     }
 
     public User getById(String id) {
-        for(int i = 0; i < size; i++){
-            if(users[i].getId().equals(id)){
+        for (int i = 0; i < size; i++) {
+            if (users[i].getId().equals(id)) {
                 return users[i];
             }
         }

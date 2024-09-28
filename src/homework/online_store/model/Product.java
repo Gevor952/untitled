@@ -104,7 +104,7 @@ public class Product {
     }
 
     public void checkQty(int qty) throws OutOfStockException {
-        if(qty > stockQty) {
+        if (qty > stockQty) {
             throw new OutOfStockException();
         }
     }

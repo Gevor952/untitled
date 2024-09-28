@@ -24,14 +24,14 @@ public class OrderStorage {
     }
 
     public void print() {
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.println(orders[i]);
         }
     }
 
     public void printByUser(User user) {
         for (Order order : orders) {
-            if(order.getUser().equals(user)) {
+            if (order.getUser().equals(user)) {
                 System.out.println(order);
             }
         }
@@ -39,7 +39,7 @@ public class OrderStorage {
 
     public void cancelById(String orderId) {
         for (Order order : orders) {
-            if(order.getId().equals(orderId)) {
+            if (order.getId().equals(orderId)) {
                 order.setOrderStatus(CANCELED);
             }
         }
@@ -47,7 +47,7 @@ public class OrderStorage {
 
     public void changeStatus() {
         for (Order order : orders) {
-            if(order.getOrderStatus() == NEW){
+            if (order.getOrderStatus() == NEW) {
                 Product product = order.getProduct();
                 product.setStockQty(product.getStockQty() - order.getQty());
                 order.setOrderStatus(DELIVERED);
