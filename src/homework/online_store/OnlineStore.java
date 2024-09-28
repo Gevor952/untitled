@@ -16,7 +16,7 @@ import work.RandomStringGenerator;
 import java.util.Date;
 import java.util.Scanner;
 
-import static homework.online_store.Enum.OrderStatus.DELIVERED;
+import static homework.online_store.Enum.OrderStatus.NEW;
 
 
 public class OnlineStore implements OnlineStoreCommands {
@@ -148,7 +148,7 @@ public class OnlineStore implements OnlineStoreCommands {
         if (answer.equals("yes")) {
             Date date = new Date();
             String orderId = RandomStringGenerator.generateRandomString(30);
-            orderStorage.add(new Order(orderId, user, product, date, price, DELIVERED, qty, paymentMethod));
+            orderStorage.add(new Order(orderId, user, product, date, price, NEW, qty, paymentMethod));
         } else {
             System.out.println("Purchase cancelled");
         }
@@ -184,9 +184,7 @@ public class OnlineStore implements OnlineStoreCommands {
 
             productStorage.add(new Product(productId, productName, productDescription,
                     productPrice, productStockQuantity, type));
-        }
-        else
-        {
+        } else {
             System.out.println("Please input how many products you want to add?");
             int qty = Integer.parseInt(scanner.nextLine());
             product.setStockQty(qty);
@@ -198,6 +196,12 @@ public class OnlineStore implements OnlineStoreCommands {
     private static void registerUser() {
         System.out.println("Please input the user id");
         String userId = scanner.nextLine();
+        if (userStorage.getById(userId) != null) {
+            System.out.println("This id is busy");
+            System.out.println("Registration is stopped");
+            System.out.println();
+            return;
+        }
         System.out.println("Please input the user name");
         String userName = scanner.nextLine();
         System.out.println("Please input the user email");

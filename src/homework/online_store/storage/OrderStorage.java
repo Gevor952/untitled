@@ -47,10 +47,10 @@ public class OrderStorage {
 
     public void changeStatus() {
         for (Order order : orders) {
-            if(order.getOrderStatus() == DELIVERED){
+            if(order.getOrderStatus() == NEW){
                 Product product = order.getProduct();
                 product.setStockQty(product.getStockQty() - order.getQty());
-                order.setOrderStatus(NEW);
+                order.setOrderStatus(DELIVERED);
             }
         }
     }

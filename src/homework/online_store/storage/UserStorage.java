@@ -48,4 +48,13 @@ public class UserStorage {
             System.out.println(users[i]);
         }
     }
+
+    public User getById(String id) {
+        for(int i = 0; i < size; i++){
+            if(users[i].getId().equals(id)){
+                return users[i];
+            }
+        }
+        return null;
+    }
 }
