@@ -1,34 +1,29 @@
 package homework.online_store.storage;
 
 import homework.online_store.model.User;
+import homework.online_store.util.SerializeUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserStorage {
-    private User[] users = new User[100];
-    private int size = 0;
+    List<User> users = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public void add(User user) {
-        if (size == users.length) {
-            extendStorage();
-        }
-        users[size++] = user;
+        users.add(user);
+        SerializeUtil.serializeUserData(users);
     }
 
-    private void extendStorage() {
-        User[] temp = new User[users.length * 2];
-        System.arraycopy(users, 0, temp, 0, users.length);
-        users = temp;
-    }
 
     public User searchUserByEmail(String email) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email)) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
                 System.out.println("Please input password");
                 String password = scanner.nextLine();
-                if (password.equals(users[i].getPassword())) {
-                    return users[i];
+                if (password.equals(user.getPassword())) {
+                    return user;
                 }
                 System.out.println("Wrong password");
                 return null;
@@ -38,17 +33,21 @@ public class UserStorage {
     }
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(users[i]);
+        for (User user : users) {
+            System.out.println(user);
         }
     }
 
     public User getById(String id) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getId().equals(id)) {
-                return users[i];
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                return user;
             }
         }
         return null;
+    }
+
+    public void deserializeUsers() {
+        this.users = SerializeUtil.deserializeUserData();
     }
 }

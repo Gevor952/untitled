@@ -3,29 +3,26 @@ package homework.online_store.storage;
 import homework.online_store.model.Order;
 import homework.online_store.model.Product;
 import homework.online_store.model.User;
+import homework.online_store.util.SerializeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static homework.online_store.Enum.OrderStatus.*;
 
 public class OrderStorage {
-    private Order[] orders = new Order[100];
-    private int size = 0;
+    List<Order> orders = new ArrayList<>();
 
     public void add(Order order) {
-        if (size == orders.length) {
-            extendStorage();
-        }
-        orders[size++] = order;
+        orders.add(order);
+        SerializeUtil.serializeOrderDate(orders);
     }
 
-    private void extendStorage() {
-        Order[] temp = new Order[orders.length * 2];
-        System.arraycopy(orders, 0, temp, 0, orders.length);
-        orders = temp;
-    }
+
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(orders[i]);
+        for (Order order : orders) {
+            System.out.println(order);
         }
     }
 
@@ -43,6 +40,7 @@ public class OrderStorage {
                 order.setOrderStatus(CANCELED);
             }
         }
+        SerializeUtil.serializeOrderDate(orders);
     }
 
     public void changeStatus() {
@@ -53,5 +51,10 @@ public class OrderStorage {
                 order.setOrderStatus(DELIVERED);
             }
         }
+        SerializeUtil.serializeOrderDate(orders);
+    }
+
+    public void deserializeOrders() {
+        this.orders = SerializeUtil.deserializeOrderData();
     }
 }

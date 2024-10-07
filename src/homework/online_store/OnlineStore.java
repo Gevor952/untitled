@@ -28,7 +28,7 @@ public class OnlineStore implements OnlineStoreCommands {
     static OrderStorage orderStorage = new OrderStorage();
 
     public static void main(String[] args) {
-
+        deserializeData();
         boolean start = true;
 
         while (start) {
@@ -54,9 +54,16 @@ public class OnlineStore implements OnlineStoreCommands {
 
     }
 
+    private static void deserializeData() {
+        userStorage.deserializeUsers();
+        productStorage.deserializeProducts();
+        orderStorage.deserializeOrders();
+    }
+
     private static void storeStart() {
         switch (user.getUserType()) {
             case ADMIN:
+                System.out.print(user.getUserType());
                 boolean startAdmin = true;
                 while (startAdmin) {
                     OnlineStoreCommands.adminCommands();
@@ -85,6 +92,7 @@ public class OnlineStore implements OnlineStoreCommands {
                             break;
                     }
                 }
+                break;
             case USER:
                 boolean startUser = true;
                 while (startUser) {
@@ -108,6 +116,7 @@ public class OnlineStore implements OnlineStoreCommands {
                             break;
                     }
                 }
+                break;
 
         }
 

@@ -4,9 +4,10 @@ package homework.online_store.model;
 import homework.online_store.Exception.OutOfStockException;
 import homework.online_store.Enum.Type;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     private String id;
     private String name;
     private String description;

@@ -3,10 +3,11 @@ package homework.online_store.model;
 import homework.online_store.Enum.OrderStatus;
 import homework.online_store.Enum.PaymentMethod;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Order {
+public class Order implements Serializable {
     private String id;
     private User user;
     private Product product;

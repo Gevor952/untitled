@@ -1,50 +1,47 @@
 package homework.online_store.storage;
 
 import homework.online_store.model.Product;
+import homework.online_store.util.SerializeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductStorage {
-    private Product[] products = new Product[100];
-    private int size = 0;
+    List<Product> products = new ArrayList<>();
 
     public void add(Product product) {
-        if (size == products.length) {
-            extendStorage();
-        }
-        products[size++] = product;
+        products.add(product);
+        SerializeUtil.serializeProductDate(products);
     }
 
-    private void extendStorage() {
-        Product[] temp = new Product[products.length * 2];
-        System.arraycopy(products, 0, temp, 0, products.length);
-        products = temp;
-    }
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            Product product = products[i];
+        for (Product product : products) {
+            System.out.println(product);
         }
 
     }
 
 
     public void deleteById(String id) {
-        for (int i = 0; i < size; i++) {
-            if (products[i].getId().equals(id)) {
-                for (int j = i - 1; j < size; j++) {
-                    products[j] = products[j + 1];
-                }
-                size--;
-                return;
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                products.remove(product);
             }
         }
+        SerializeUtil.serializeProductDate(products);
     }
 
     public Product searchById(String productId) {
-        for (int i = 0; i < size; i++) {
-            if (products[i].getId().equals(productId)) {
-                return products[i];
+        for (Product product : products) {
+            if (product.getId().equals(productId)) {
+                return product;
             }
         }
         return null;
+    }
+
+    public void deserializeProducts() {
+        this.products = SerializeUtil.deserializeProductData();
     }
 }
