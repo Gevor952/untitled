@@ -44,4 +44,8 @@ public class ProductStorage {
     public void deserializeProducts() {
         this.products = SerializeUtil.deserializeProductData();
     }
+
+    public void uppFiles() {
+        SerializeUtil.serializeProductDate(products);
+    }
 }

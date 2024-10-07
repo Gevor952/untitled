@@ -140,26 +140,28 @@ public class OnlineStore implements OnlineStoreCommands {
         int qty = Integer.parseInt(scanner.nextLine());
         try {
             product.checkQty(qty);
+            PaymentMethod[] paymentMethods = PaymentMethod.values();
+            for (PaymentMethod paymentMethod : paymentMethods) {
+                System.out.print(paymentMethod);
+            }
+            System.out.println("Please choose one of the payment methods");
+            PaymentMethod paymentMethod = PaymentMethod.valueOf((scanner.nextLine()).toUpperCase());
+            double price = product.getPrice();
+            price *= qty;
+            System.out.println("The price of the product is " + price + "$" + " do you want to buy?");
+            System.out.println("Please input yes or no");
+            String answer = scanner.nextLine();
+            if (answer.equals("yes")) {
+                Date date = new Date();
+                String orderId = RandomStringGenerator.generateRandomString(30);
+                orderStorage.add(new Order(orderId, user, product, date, price, NEW, qty, paymentMethod));
+                product.setStockQty(product.getStockQty() - qty);
+                productStorage.uppFiles();
+            } else {
+                System.out.println("Purchase cancelled");
+            }
         } catch (OutOfStockException e) {
             System.out.println("There are not many items in stock");
-        }
-        PaymentMethod[] paymentMethods = PaymentMethod.values();
-        for (PaymentMethod paymentMethod : paymentMethods) {
-            System.out.print(paymentMethod);
-        }
-        System.out.println("Please choose one of the payment methods");
-        PaymentMethod paymentMethod = PaymentMethod.valueOf((scanner.nextLine()).toUpperCase());
-        double price = product.getPrice();
-        price *= qty;
-        System.out.println("The price of the product is " + price + "$" + " do you want to buy?");
-        System.out.println("Please input yes or no");
-        String answer = scanner.nextLine();
-        if (answer.equals("yes")) {
-            Date date = new Date();
-            String orderId = RandomStringGenerator.generateRandomString(30);
-            orderStorage.add(new Order(orderId, user, product, date, price, NEW, qty, paymentMethod));
-        } else {
-            System.out.println("Purchase cancelled");
         }
     }
 
@@ -196,7 +198,8 @@ public class OnlineStore implements OnlineStoreCommands {
         } else {
             System.out.println("Please input how many products you want to add?");
             int qty = Integer.parseInt(scanner.nextLine());
-            product.setStockQty(qty);
+            product.setStockQty(product.getStockQty() + qty);
+            productStorage.uppFiles();
         }
 
 
