@@ -48,8 +48,20 @@ public class FileAnalyzer {
 
     public Map<String, Integer> topFrequentWords(String path, int n) throws IOException {
         // Читаем файл, находим топ-N часто встречающихся слов
-        Map<String, Integer> arr = wordMap(path);
-        return null;
+        Map<String, Integer> wordMap = wordMap(path);
+        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(wordMap.entrySet());
+        sortedEntries.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
+        Map<String, Integer> topWords = new LinkedHashMap<>();
+        if(n > wordMap.size())
+        {
+            throw new IllegalArgumentException("n > size");
+        }
+        for (int i = 0; i < n && i < sortedEntries.size(); i++) {
+            Map.Entry<String, Integer> entry = sortedEntries.get(i);
+            topWords.put(entry.getKey(), entry.getValue());
+        }
+
+        return topWords;
     }
 
     public int countWordOccurrences(String path, String word) throws IOException {

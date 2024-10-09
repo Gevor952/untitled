@@ -16,7 +16,8 @@ public class FileTest {
         System.out.println(sum);
         sum = fileAnalyzer.uniqueWordCount(FILE_PHAT);
         System.out.println(sum);
-
+        arr = fileAnalyzer.topFrequentWords(FILE_PHAT, 3);
+        System.out.println(arr);
         sum = fileAnalyzer.countWordOccurrences(FILE_PHAT, "Jav");
         System.out.println(sum);
 
