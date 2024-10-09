@@ -1,91 +1,62 @@
 package homework.file_homework;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.security.Key;
+import java.util.*;
 
 public class FileAnalyzer {
 
-
-    public Map<String, Integer> wordMap(String path) throws IOException, ClassNotFoundException {
+    public Map<String, Integer> wordMap(String path) throws IOException {
         // Читаем файл, составляем мапу слово-количество и возвращаем ее
         File file = new File(path);
-        if (file.exists()) {
-            try (ObjectInputStream objectInputStreamStream = new ObjectInputStream(new FileInputStream(file))) {
-                Object object = objectInputStreamStream.readObject();
-                if (object instanceof Map) {
-                    return (Map<String, Integer>) object;
+        Map<String, Integer> arr = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                line = line.replaceAll("!", "").replaceAll(",", "").replaceAll("\\.", "").replaceAll("\\?", "");
+                String[] words = line.split(" ");
+                for (String word : words) {
+                    if (arr.containsKey(word)) {
+                        int count = arr.get(word);
+                        arr.put(word, ++count);
+                    } else {
+                        arr.put(word, 1);
+                    }
+
                 }
             }
         }
-
-
-        return null;
+        return arr;
     }
 
     public int totalWordCount(String path) throws IOException {
         // Читаем файл, подсчитываем общее количество слов
-        File file = new File(path);
-        if (file.exists()) {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
-                String line = "";
-                int count = 0;
-                while ((line = bufferedReader.readLine()) != null) {
-                    ++count;
-                }
-                return count;
-            }
+        Map<String, Integer> arr = wordMap(path);
+        Collection<Integer> wordsCounts = arr.values();
+        int sum = 0;
+        for (int count : wordsCounts) {
+            sum += count;
         }
-        return 0;
+
+        return sum;
     }
 
     public int uniqueWordCount(String path) throws IOException {
         // Читаем файл, подсчитываем количество уникальных слов
-        File file = new File(path);
-        if (file.exists()) {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
-                String line = "";
-                Set<String> uniqueWords = new HashSet<>();
-                while ((line = bufferedReader.readLine()) != null) {
-                    uniqueWords.add(line);
-                }
-                return uniqueWords.size();
-            }
-        }
-        return 0;
+        return wordMap(path).size();
     }
 
-    public Map<String, Integer> topFrequentWords(String path, int n) throws IOException, ClassNotFoundException {
+    public Map<String, Integer> topFrequentWords(String path, int n) throws IOException {
         // Читаем файл, находим топ-N часто встречающихся слов
-        File file = new File(path);
-        if (file.exists()) {
-            try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-                Object object = objectInputStream.readObject();
-                if (object instanceof Map) {
-                    if (((Map<String, Integer>) object).containsValue(n)) {
-                        return (Map<String, Integer>) object;
-                    }
-                }
-            }
-        }
+        Map<String, Integer> arr = wordMap(path);
         return null;
     }
 
     public int countWordOccurrences(String path, String word) throws IOException {
         // Читаем файл, находим количество вхождений слова и возвращаем это число
-        File file = new File(path);
-        if (file.exists()) {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
-                String line = "";
-                int count = 0;
-                while ((line = bufferedReader.readLine()) != null) {
-                    if (line.equals(word)) {
-                        ++count;
-                    }
-                }
-                return count;
-            }
+        Map<String, Integer> arr = wordMap(path);
+        if (arr.get(word) != null) {
+            return arr.get(word);
         }
         return 0;
     }
