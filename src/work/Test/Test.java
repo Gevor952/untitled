@@ -1,6 +1,7 @@
 package work.Test;
 
 
+
 public class Test {
 
 
@@ -10,7 +11,7 @@ public class Test {
         long start = System.currentTimeMillis();
         long s = System.currentTimeMillis();
         HashMap<Integer, Integer> map = new HashMap<>();
-        for(int i = 0; i < 2_000_000; i++) {
+        for(int i = 0; i < 200_000; i++) {
             map.put(i, i);
             if (map.size() % 1000 == 0) {
                 System.out.println(map.size() + " " + (System.currentTimeMillis() - s));

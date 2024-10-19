@@ -175,9 +175,19 @@ public class HashMap<K, V> implements Map<K, V> {
         if (this.size > this.table.length && this.table.length < (1 << 30)) {
             Node<K, V>[] oldTable = this.table;
             this.table = new Node[this.table.length * 2];
-            for (Node<K, V> head : oldTable) {
-                for (Node<K, V> node = head; node != null; node = node.next) {
-                    this.put(node.key, node.value);
+            for (Node<K, V> oldHead : oldTable) {
+                for (Node<K, V> oldNode = oldHead; oldNode != null; oldNode = oldNode.next) {
+                    int index = this.indexFor(oldNode.key);
+                    Node<K, V> head = this.table[index];
+                    for (Node<K, V> node = head; node != null; node = node.next) {
+                        if(node.key == null) {
+                            node.key = oldNode.key;
+                            node.value = oldNode.value;
+                        }else if(node.next == null) {
+                            node.key = oldNode.key;
+                            node.value = oldNode.value;
+                        }
+                    }
                 }
             }
         }
